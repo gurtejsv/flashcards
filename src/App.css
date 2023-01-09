@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+.cards-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  width: 250px;
+  height: 335px;
+  position: relative;
+  border: none;
+  transform-style: preserve-3d;
+  transition: 150ms;
+  cursor: pointer;
+}
+
+.card.flip {
+  transform: rotateY(180deg);
+}
+
+.card .front,
+.card .back {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  border-radius: .25rem;
+  user-select: none;
+  overflow: hidden;
+}
+
+.card .back {
+  transform: rotateY(180deg);
+}
