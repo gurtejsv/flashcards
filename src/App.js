@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import "./App.css"
 import FlashcardList from "./FlashcardList"
 import { v4 as uuidv4 } from "uuid"
+
+const LOCAL_STORAGE_KEY = "flashcards"
 
 function App() {
   const [flashcards, setFlashcards] = useState(
@@ -16,6 +18,16 @@ function App() {
 
   const [back, setBack] = useState("")
   const [front, setFront] = useState("")
+
+  useEffect(() => {
+    const storedFlashcards = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+
+    if (storedFlashcards) setFlashcards(storedFlashcards)
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(flashcards))
+  }, [flashcards])
 
   function removeFlashcard(id) {
     const newFlashcards = flashcards.filter(flashcard => flashcard.id !== id)
